@@ -50,30 +50,6 @@ $config['ci_bootstrap'] = array(
 
 	// Default CSS class for <body> tag
 	'body_class' => '',
-	
-	// Multilingual settings
-	'languages' => array(
-		'default'		=> 'en',
-		'autoload'		=> array('general'),
-		'available'		=> array(
-			'en' => array(
-				'label'	=> 'English',
-				'value'	=> 'english'
-			),
-			'zh' => array(
-				'label'	=> '繁體中文',
-				'value'	=> 'traditional-chinese'
-			),
-			'cn' => array(
-				'label'	=> '简体中文',
-				'value'	=> 'simplified-chinese'
-			),
-			'es' => array(
-				'label'	=> 'Español',
-				'value' => 'spanish'
-			)
-		)
-	),
 
 	// Google Analytics User ID
 	'ga_id' => '',

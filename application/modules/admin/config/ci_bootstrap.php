@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['ci_bootstrap'] = array(
 
 	// Site name
-	'site_name' => 'Admin Panel',
+	'site_name' => 'Being Weird Admin Panel',
 
 	// Default page title prefix
 	'page_title_prefix' => '',
@@ -25,7 +25,7 @@ $config['ci_bootstrap'] = array(
 
 	// Default meta data
 	'meta_data'	=> array(
-		'author'		=> '',
+		'author'		=> 'Aravind Umasankar',
 		'description'	=> '',
 		'keywords'		=> ''
 	),
@@ -63,7 +63,48 @@ $config['ci_bootstrap'] = array(
 			'name'		=> 'Home',
 			'url'		=> '',
 			'icon'		=> 'fa fa-home',
+                        'children'      => array(
+                                'Categories'  => 'home/categories',
+                        )
 		),
+                'beard' => array(
+			'name'		=> 'Being Beard',
+			'url'		=> 'beards',
+			'icon'		=> 'fa fa-male ',	// can use Ionicons instead of FontAwesome
+			'children'  => array(
+                                'Beard of the Day'	=> 'beard/daycampaigns',
+                                'Beard Month Campaigns'	=> 'beard/monthcampaigns',
+                                'Beard Categories'      => 'beard/categories',
+			)
+		),
+                'beautiful' => array(
+			'name'		=> 'Being Beautiful',
+			'url'		=> 'beauty',
+			'icon'		=> 'fa fa-female ',	// can use Ionicons instead of FontAwesome
+			'children'  => array(
+                                'Beauty of the Day'	=> 'beauty/daycampaigns',
+                                'Beauty Month Campaigns'	=> 'beauty/monthcampaigns',
+			)
+		),
+                'superhero' => array(
+			'name'		=> 'Being Super Hero',
+			'url'		=> 'superhero',
+			'icon'		=> 'fa fa-users',	// can use Ionicons instead of FontAwesome
+			'children'  => array(
+                                'Super Hero of the Day'	=> 'superhero/daycampaigns',
+                                'Super Hero Month Campaigns'	=> 'superhero/monthcampaigns',
+			)
+		),
+                'biker' => array(
+			'name'		=> 'Being Biker',
+			'url'		=> 'biker',
+			'icon'		=> 'fa fa-motorcycle',	// can use Ionicons instead of FontAwesome
+			'children'  => array(
+                                'Biker of the Day'	=> 'biker/daycampaigns',
+                                'Biker Month Campaigns'	=> 'biker/monthcampaigns', 
+			)
+		),
+                
 		'user' => array(
 			'name'		=> 'Users',
 			'url'		=> 'user',
