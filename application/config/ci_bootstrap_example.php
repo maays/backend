@@ -5,165 +5,134 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | -------------------------------------------------------------------------
 | CI Bootstrap 3 Configuration
 | -------------------------------------------------------------------------
-| This file lets you define default values to be passed into views when calling 
-| MY_Controller's render() function. 
-|
-| Most of them can be overrided from child controllers, includes:
-| 	- $this->mSiteName
-| 	- $this->mPageTitlePrefix
-| 	- $this->mPageTitle
-| 	- $this->mBodyClass
-| 	- $this->mMetaData
-| 	- $this->mScripts
-| 	- $this->mStylesheets
-|	- $this->mMenu
-| 	- $this->mPageAuth
+| This file lets you define default values to be passed into views 
+| when calling MY_Controller's render() function. 
+| 
+| See example and detailed explanation from:
+| 	/application/config/ci_bootstrap_example.php
 */
 
 $config['ci_bootstrap'] = array(
 
-	/*
-	| -------------------------------------------------------------------------
-	| Common configuration
-	| -------------------------------------------------------------------------
-	| For both Frontend Website, Admin Panel and API Site
-	*/
-
 	// Site name
-	'site_name' => 'CI Bootstrap 3',
+	'site_name' => 'Admin Panel',
 
 	// Default page title prefix
-	'page_title_prefix' => 'CI Bootstrap 3 - ',
+	'page_title_prefix' => '',
 
 	// Default page title
-	// (set empty then MY_Controller will automatically generate one based on controller / action)
 	'page_title' => '',
 
 	// Default meta data
-	// (name => content)
 	'meta_data'	=> array(
-		'author'		=> 'Michael Chan (https://github.com/waifung0207)',
-		'description'	=> 'CI Bootstrap 3',
-		'keywords'		=> 'PHP,CodeIgniter,CRUD'
+		'author'		=> '',
+		'description'	=> '',
+		'keywords'		=> ''
 	),
-
+	
 	// Default scripts to embed at page head or end
-	// (position => script array)
 	'scripts' => array(
 		'head'	=> array(
+			'assets/dist/admin/adminlte.min.js',
+			'assets/dist/admin/lib.min.js',
+			'assets/dist/admin/app.min.js'
 		),
 		'foot'	=> array(
-			'assets/dist/app.min.js'
 		),
 	),
 
 	// Default stylesheets to embed at page head
-	// (media => stylesheet array)
 	'stylesheets' => array(
 		'screen' => array(
-			// for screen display
-			'assets/dist/app.min.css'
-		),
-		'print' => array(
-			// for print media
+			'assets/dist/admin/adminlte.min.css',
+			'assets/dist/admin/lib.min.css',
+			'assets/dist/admin/app.min.css'
 		)
 	),
 
 	// Default CSS class for <body> tag
 	'body_class' => '',
-
-	// Multilingual settings (set empty array to disable this)
-	'languages' => array(
-		'default'		=> 'en',				// to decide which of the "available" languages should be used
-		'autoload'		=> array('general'),	// language files to autoload
-		'available'		=> array(				// availabe languages with names to display on site (e.g. on menu)
-			'en' => array(						// abbr. value to be used on URL, or linked with database fields
-				'label'	=> 'English',			// label to be displayed on language switcher
-				'value'	=> 'english'			// to match with CodeIgniter folders inside application/language/
-			),
-			'zh' => array(
-				'label'	=> '繁體中文',
-				'value'	=> 'traditional-chinese'
-			),
-			'cn' => array(
-				'label'	=> '简体中文',
-				'value'	=> 'simplified-chinese'
-			),
-			'es' => array(
-				'label'	=> 'Español',
-				'value' => 'spanish'
-			)
-		)
-	),
 	
-	// Google Analytics User ID
-	'ga_id' => 'UA-XXXXXXXX-X',
+	// Multilingual settings
+	'languages' => array(
+	),
 
 	// Menu items
-	// (or directly update view file: /application/modules/admin/views/_partials/sidemenu.php)
 	'menu' => array(
 		'home' => array(
 			'name'		=> 'Home',
 			'url'		=> '',
 			'icon'		=> 'fa fa-home',
 		),
-		'auth' => array(
-			'name'		=> 'Auth',
-			'url'		=> 'auth',
+		'user' => array(
+			'name'		=> 'Users',
+			'url'		=> 'user',
 			'icon'		=> 'fa fa-users',
 			'children'  => array(
-				'Login'			=> 'auth/login',
-				'Sign Up'		=> 'auth/sign_up',
+				'List'			=> 'user',
+				'Create'		=> 'user/create',
+				'User Groups'	=> 'user/group',
 			)
 		),
+		'blog' => array(
+			'name'		=> 'Blog',
+			'url'		=> 'blog',
+			'icon'		=> 'ion ion-edit',	// can use Ionicons instead of FontAwesome
+			'children'  => array(
+				'Blog Posts'		=> 'blog/post',
+				'Blog Categories'	=> 'blog/category',
+				'Blog Tags'			=> 'blog/tag',
+			)
+		),
+		'cover_photo' => array(
+			'name'		=> 'Cover Photos',
+			'url'		=> 'cover_photo',
+			'icon'		=> 'ion ion-image',	// can use Ionicons instead of FontAwesome
+		),
+		'panel' => array(
+			'name'		=> 'Admin Panel',
+			'url'		=> 'panel',
+			'icon'		=> 'fa fa-cog',
+			'children'  => array(
+				'Admin Users'			=> 'panel/admin_user',
+				'Create Admin User'		=> 'panel/admin_user_create',
+				'Admin User Groups'		=> 'panel/admin_user_group',
+			)
+		),
+		'util' => array(
+			'name'		=> 'Utilities',
+			'url'		=> 'util',
+			'icon'		=> 'fa fa-cogs',
+			'children'  => array(
+				'Database Versions'		=> 'util/list_db',
+			)
+		),
+		'logout' => array(
+			'name'		=> 'Sign Out',
+			'url'		=> 'panel/logout',
+			'icon'		=> 'fa fa-sign-out',
+		)
 	),
 
-	// Login page (to redirect non-logged-in users)
-	'login_url' => 'auth/login',
+	// Login page
+	'login_url' => 'admin/login',
 
-	// Restricted pages to specific groups of users, which will affect sidemenu item as well
-	// pages out of this array will have no restriction (except required admin user login)
+	// Restricted pages
 	'page_auth' => array(
-		// Example: Frontend Website pages for registered users
-		'dashboard'					=> array('members'),
-		'account'					=> array('members'),
-
-		// Example: Admin Panel pages for admin users
 		'user/create'				=> array('webmaster', 'admin', 'manager'),
 		'user/group'				=> array('webmaster', 'admin', 'manager'),
 		'panel'						=> array('webmaster'),
 		'panel/admin_user'			=> array('webmaster'),
 		'panel/admin_user_create'	=> array('webmaster'),
 		'panel/admin_user_group'	=> array('webmaster'),
+		'util'						=> array('webmaster'),
+		'util/list_db'				=> array('webmaster'),
+		'util/backup_db'			=> array('webmaster'),
+		'util/restore_db'			=> array('webmaster'),
+		'util/remove_db'			=> array('webmaster'),
 	),
 
-	// Email config (to be used in MY_Email library)
-	'email' => array(
-		'from_email'		=> 'noreply@email.com',
-		'from_name'			=> 'CI Bootstrap',
-		'subject_prefix'	=> '[CI Bootstrap] ',
-
-		// Mailgun HTTP API
-		'mailgun_api'		=> array(
-			'domain'			=> '',
-			'private_api_key'	=> ''
-		),
-	),
-
-	// Debug tools (available only when ENVIRONMENT = 'development')
-	'debug' => array(
-		'view_data'	=> FALSE,	// whether to display MY_Controller's mViewData at page end
-		'profiler'	=> FALSE	// whether to display CodeIgniter's profiler at page end
-	),
-
-	/*
-	| -------------------------------------------------------------------------
-	| Configuration for Admin Panel only
-	| -------------------------------------------------------------------------
-	*/
-	
 	// AdminLTE settings
-	// (admin user group => configuration, e.g. CSS class for skin)
 	'adminlte' => array(
 		'body_class' => array(
 			'webmaster'	=> 'skin-red',
@@ -173,7 +142,7 @@ $config['ci_bootstrap'] = array(
 		)
 	),
 
-	// Useful links to display at bottom of sidemenu (e.g. to pages outside Admin Panel)
+	// Useful links to display at bottom of sidemenu
 	'useful_links' => array(
 		array(
 			'auth'		=> array('webmaster', 'admin', 'manager', 'staff'),
@@ -198,17 +167,10 @@ $config['ci_bootstrap'] = array(
 		),
 	),
 
-	/*
-	| -------------------------------------------------------------------------
-	| Configuration for API Site only
-	| -------------------------------------------------------------------------
-	*/
-	
-	// Raw PHP Headers (e.g. enable CORS or not) to send at page start
-	'headers' => array(
-		'Access-Control-Allow-Origin: *',
-		'Access-Control-Request-Method: GET, POST, PUT, DELETE, OPTIONS',
-		'Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization',
+	// Debug tools
+	'debug' => array(
+		'view_data'	=> FALSE,
+		'profiler'	=> FALSE
 	),
 );
 
@@ -217,6 +179,4 @@ $config['ci_bootstrap'] = array(
 | Override values from /application/config/config.php
 | -------------------------------------------------------------------------
 */
-
-// Allow different modules to use different login sessions
-$config['sess_cookie_name'] = 'ci_session_example';
+$config['sess_cookie_name'] = 'ci_session_admin';
