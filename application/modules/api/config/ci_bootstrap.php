@@ -25,8 +25,8 @@ $config['ci_bootstrap'] = array(
 	
 	// Default meta data
 	'meta_data'	=> array(
-		'author'		=> '',
-		'description'	=> '',
+		'author'		=> 'Aravind Umasankar',
+		'description'	=> 'Swagger Being Weird',
 		'keywords'		=> ''
 	),
 

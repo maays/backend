@@ -15,6 +15,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * )
  */
 
+ /**
+ * @SWG\Tag(
+ *   name="user",
+ *   description="Weird Users"
+ * )
+ */
+
 
 
  
