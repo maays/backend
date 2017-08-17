@@ -80,7 +80,7 @@ class UserLogin {
 	 * @var string
 	 * @SWG\Property()
 	 */
-	public $email;
+	public $identity;
 
 
 	/**

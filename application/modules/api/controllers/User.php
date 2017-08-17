@@ -35,7 +35,18 @@ class User extends API_Controller {
 	public function create_post()
 	{		
 			$this->load->model('User_model');
-			$data = elements(array('username','email','password','first_name','last_name','phone'), $this->post());
+			if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST)){
+			$data = json_decode(file_get_contents('php://input'), true);
+			$username = $data['username'];
+			$email = $data['email'];
+			$password = $data['password'];
+			$identity = empty($username) ? $email : $username;
+			$additional_data = array(
+				'first_name'	=> $data['first_name'],
+			);
+			}
+			else{
+			$data = elements(array('username','email','password','first_name','last_name'), $this->post());
 			// passed validation
 			$username = $data['username'];
 			$email = $data['email'];
@@ -43,9 +54,9 @@ class User extends API_Controller {
 			$identity = empty($username) ? $email : $username;
 			$additional_data = array(
 				'first_name'	=> $data['first_name'],
-				'last_name'		=> $data['last_name'],
-				'phone'			=> $data['phone'],
 			);
+			}
+			
 			$check_user = $this->User_model->checkUser($data);
 			if($check_user == 'user_exists'){
 				$result['status'] = "false";
@@ -82,30 +93,34 @@ class User extends API_Controller {
 	 */
 	public function login_post(){
 
+		if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST)){
+			$data = json_decode(file_get_contents('php://input'), true);
+			$identity =$data['identity'];
+			$password =$data['password'];
+		}
+    	else{
+			$identity =$this->post('identity');
+			$password =$this->post('password');	
+		}
 		//$this->load->model('User_model');
-		$data = elements(array('username','email','phone','password'), $this->post());
-		if($data['username']!=''){
-			$identity = $data['username']; 
-		}
-		if($data['email']!=''){
-			$identity = $data['email']; 
-		}
-		if($data['phone']!=''){
-			$identity = $data['phone']; 
-		}
-		
-		$password = $data['password'];	
 			if ($this->ion_auth->login($identity, $password, $remember=FALSE))
 			{
 				// login succeed
-				$messages = $this->ion_auth->messages();
+				$response['id']=$this->ion_auth->user()->row()->id;
+				$response['email']=$this->ion_auth->user()->row()->email;
+				$response['username']=$this->ion_auth->user()->row()->username;
+				$response['first_name']=$this->ion_auth->user()->row()->first_name;
+				$response['last_login']=$this->ion_auth->user()->row()->last_login;
+				$response['status'] = 'true';
+				$response['msg'] = $this->ion_auth->messages();
 			}
 			else
 			{
 				// login failed
-				$messages = $this->ion_auth->errors();
+				$response['status'] = 'false';
+				$response['msg'] = $this->ion_auth->errors();
 			}
-			$this->response($messages);
+			$this->response($response);
 
 	}
 

@@ -179,7 +179,7 @@ $config['store_salt']  = FALSE;
  | Message Delimiters.
  | -------------------------------------------------------------------------
  */
-$config['delimiters_source']       = 'config'; 	// "config" = use the settings defined here, "form_validation" = use the settings defined in CI's form validation library
+$config['delimiters_source']       = 'form_validation'; 	// "config" = use the settings defined here, "form_validation" = use the settings defined in CI's form validation library
 $config['message_start_delimiter'] = ''; 	// Message start delimiter
 $config['message_end_delimiter']   = ''; 	// Message end delimiter
 $config['error_start_delimiter']   = '';		// Error message start delimiter
